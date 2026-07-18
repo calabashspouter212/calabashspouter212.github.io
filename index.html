@@ -787,6 +787,13 @@
   <button class="btn btn-outline" onclick="go('disclaimer')" style="margin-top:4px;">📄 Read Terms of Service</button>
   <button class="btn btn-danger" onclick="confirmReset()" style="margin-top:10px;">Reset All Progress</button>
 
+  <!-- Hidden owner unlock — type CHERRYSUNDAE and press Enter -->
+  <input id="owner-unlock-inp" type="password" autocomplete="off" autocorrect="off" spellcheck="false"
+    style="opacity:0;position:absolute;width:1px;height:1px;pointer-events:none;"
+    onkeydown="if(event.key==='Enter'||event.keyCode===13){var v=this.value.toUpperCase().trim();if(v==='CHERRYSUNDAE'){localStorage.setItem('pg_owner','1');this.value='';var b=document.getElementById('owner-badge');if(!b){b=document.createElement('div');b.id='owner-badge';b.style.cssText='position:fixed;top:10px;right:10px;z-index:9999;background:rgba(168,85,247,0.9);color:#fff;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;letter-spacing:0.5px;cursor:pointer;box-shadow:0 2px 10px rgba(168,85,247,0.4);';b.textContent='👑 Support Guide';b.onclick=function(){go('owner-guide');};document.body.appendChild(b);}go('owner-guide');}else{this.value='';}}" />
+  <div onclick="document.getElementById('owner-unlock-inp').style.cssText='opacity:0;position:absolute;width:1px;height:1px;pointer-events:none;';document.getElementById('owner-unlock-inp').focus();"
+    style="height:18px;margin-top:8px;cursor:default;user-select:none;" aria-hidden="true"></div>
+
   <div class="bnav">
     <div class="nitem" onclick="go('dashboard')"><div class="nicon">🏠</div><div class="nlbl">Home</div></div>
     <div class="nitem" onclick="go('faq')"><div class="nicon">❓</div><div class="nlbl">FAQ</div></div>
@@ -1380,15 +1387,15 @@
 
     <!-- ── HOW TO DEPLOY AN UPDATE ── -->
     <div class="scard" style="margin-bottom:14px;">
-      <div class="scardlbl" style="color:var(--teal-l);">🚀 How to Deploy an Update to Netlify</div>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.7;margin-bottom:10px;">The entire app is the single HTML file. To push an update:</p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">1.</strong> Make changes to <strong>PrivacyGuide-App.html</strong></p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">2.</strong> Rename a copy of the file to <strong>index.html</strong></p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">3.</strong> Zip it: a .zip containing only index.html</p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">4.</strong> Go to <a href="https://github.com/privacyguide-io/privacyguide-io.github.io/upload/main" target="_blank" style="color:var(--teal-l);text-decoration:none;">GitHub repo → Upload files</a></p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">5.</strong> Drag and drop the .zip onto the "Need to update your site?" area at the bottom</p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">6.</strong> Wait ~10 seconds — look for "Production: Published" confirmation</p>
-      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-top:6px;">⚠️ <strong style="color:var(--white);">Chrome extension note:</strong> use a fresh tab when uploading. Netlify's dashboard does background polling that prevents the extension's file upload from working on tabs that have been open too long. Open a new tab, navigate to Netlify, then upload.</p>
+      <div class="scardlbl" style="color:var(--teal-l);">🚀 How to Deploy an Update (GitHub Pages)</div>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.7;margin-bottom:10px;">The entire app is a single HTML file hosted on GitHub Pages. To push an update:</p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">1.</strong> Make your changes to <strong>PrivacyGuide-App.html</strong> in Claude Cowork</p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">2.</strong> Save a copy renamed to <strong>index.html</strong></p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">3.</strong> Go to <a href="https://github.com/privacyguide-io/privacyguide-io.github.io/upload/main" target="_blank" style="color:var(--teal-l);text-decoration:none;">github.com/privacyguide-io/privacyguide-io.github.io → Upload files</a></p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">4.</strong> Drag <strong>index.html</strong> into the upload area (no zip needed)</p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">5.</strong> Scroll down, add a short commit message (e.g. "update app"), click <strong>Commit changes</strong></p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-bottom:6px;"><strong style="color:var(--white);">6.</strong> Wait ~1–2 minutes — GitHub Pages rebuilds automatically. Visit <a href="https://privacyguide-io.github.io" target="_blank" style="color:var(--teal-l);text-decoration:none;">privacyguide-io.github.io</a> to confirm.</p>
+      <p style="font-size:12.5px;color:var(--dim);line-height:1.65;margin-top:6px;">💡 <strong style="color:var(--white);">Tip:</strong> GitHub will warn you that index.html already exists — that's expected. Choose to replace it.</p>
     </div>
 
     <!-- ── HOW GUMROAD WORKS ── -->
